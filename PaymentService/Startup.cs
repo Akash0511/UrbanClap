@@ -32,6 +32,7 @@ namespace PaymentService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PaymentService", Version = "v1" });
             });
+            services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +44,6 @@ namespace PaymentService
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentService v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

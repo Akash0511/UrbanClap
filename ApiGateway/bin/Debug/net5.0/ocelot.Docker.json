@@ -1,0 +1,554 @@
+{
+  "Routes": [
+    //Consumer Calls
+    {
+      "DownstreamPathTemplate": "/consumer/register",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/consumer-register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "consumerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/consumer/editProfile/{consumerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/consumer-editProfile/{consumerId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "consumerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/consumer/getConsumerDetails/{consumerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getConsumerDetails/{consumerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "consumerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/getAllRaisedServiceRequests/{consumerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllRaisedServiceRequests/{consumerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/getRaisedServiceRequestDetails/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getRaisedServiceRequestDetails/{requestId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/postRaiseServiceRequest",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/raiseServiceRequest",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/cancelRaiseServiceRequest/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/cancelServiceRequest/{requestId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/makePayment",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/makePayment",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+
+    // Provider Calls
+    {
+      "DownstreamPathTemplate": "/provider/register",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/provider-register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "providerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/provider/editProfile/{providerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/provider-editProfile/{providerId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "providerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/provider/getProviderDetails/{providerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getProviderDetails/{providerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "providerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/getServiceRequestInfo/{providerId}?requestStatus={requestStatus}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getServiceRequestInfo/{providerId}?requestStatus={requestStatus}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/admin/serviceRequestAcceptOrDeny",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/serviceRequestAcceptOrDeny",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "adminservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/getJobDescription/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getJobDescription/{requestId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+
+    //// Admin Calls
+    {
+      "DownstreamPathTemplate": "/order/getAllRaisedRequestDetailsByStatus/{requestStatus}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllRaisedRequestDetailsByStatus/{requestStatus}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/getAllRaisedRequestDetails",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllRaisedRequestDetails",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/provider/getAllAvailableProviderDetails/{locationId}?serviceId={serviceId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllAvailableProviderDetails/{locationId}?serviceId={serviceId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "providerservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/order/assignProviderToServiceRequest?requestId={requestId}&providerId={providerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/assignProviderToServiceRequest?requestId={requestId}&providerId={providerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordermanagementservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/admin/getAllAcceptedRequestByProviders/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllAcceptedRequestByProviders/{requestId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "adminservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/admin/sendNotificationToMatchedProviders/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/sendNotificationToMatchedProviders/{requestId}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "adminservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/location/addLocation",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/location/addLocation",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/location/getAllLocation",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/location/getAllLocation",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/ondemandservice/addService",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/addService",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/ondemandservice/activateService/{serviceId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/activateService/{serviceId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/ondemandservice/deactivateService/{serviceId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/deactivateService/{serviceId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/ondemandservice/getAllServicesByLocation/{locationId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllServicesByLocation/{locationId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/ondemandservice/getAvailableServicesByLocation/{locationId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAvailableServicesByLocation/{locationId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ondemandservice",
+          "Port": 80
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "UseServiceDiscovery": true
+  }
+}

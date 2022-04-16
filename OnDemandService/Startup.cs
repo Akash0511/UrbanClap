@@ -32,6 +32,7 @@ namespace OnDemandService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnDemandService", Version = "v1" });
             });
+            services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +44,6 @@ namespace OnDemandService
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnDemandService v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
