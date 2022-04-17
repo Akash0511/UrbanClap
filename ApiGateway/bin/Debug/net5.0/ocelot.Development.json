@@ -1,13 +1,18 @@
 {
   "Routes": [
     //Consumer Calls
-    {
-      "ServiceName": "consumerservice",
-      "DownstreamPathTemplate": "/consumer/getConsumerDetails/{consumerId}",
-      "DownstreamScheme": "http",
-      "UpstreamPathTemplate": "/getConsumerDetails/{consumerId}",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
+    //{
+    //  "ServiceName": "consumerservice",
+    //  "DownstreamPathTemplate": "/consumer/getConsumerDetails/{consumerId}",
+    //  "DownstreamScheme": "http",
+    //  "UpstreamPathTemplate": "/getConsumerDetails/{consumerId}",
+    //  "UpstreamHttpMethod": [ "GET" ],
+    //    "QoSOptions": {
+    //      "ExceptionsAllowedBeforeBreaking": 2,
+    //      "DurationOfBreak": 60000,
+    //      "TimeoutValue": 20000
+    //    }
+    //},
     //{
     //  "DownstreamPathTemplate": "/consumer/register",
     //  "DownstreamScheme": "http",
@@ -48,26 +53,21 @@
     //    "TimeoutValue": 20000
     //  }
     //},
-    //{
-    //  "DownstreamPathTemplate": "/consumer/getConsumerDetails/{consumerId}",
-    //  "DownstreamScheme": "http",
-    //  "UpstreamPathTemplate": "/getConsumerDetails/{consumerId}",
-    //  "UpstreamHttpMethod": [ "Get" ],
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "consumerservice",
-    //      "Port": 80
-    //    }
-    //  ],
-    //  "LoadBalancerOptions": {
-    //    "Type": "RoundRobin"
-    //  },
-    //  "QoSOptions": {
-    //    "ExceptionsAllowedBeforeBreaking": 2,
-    //    "DurationOfBreak": 60000,
-    //    "TimeoutValue": 20000
-    //  }
-    //},
+    {
+      "ServiceName": "consumerservice",
+      "DownstreamPathTemplate": "/consumer/getConsumerDetails/{consumerId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getConsumerDetails/{consumerId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 60000,
+        "TimeoutValue": 20000
+      }
+    },
     //{
     //  "DownstreamPathTemplate": "/order/getAllRaisedServiceRequests/{consumerId}",
     //  "DownstreamScheme": "http",

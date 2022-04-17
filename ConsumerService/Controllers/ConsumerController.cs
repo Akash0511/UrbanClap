@@ -2,6 +2,7 @@
 using ConsumerService.Models;
 using ConsumerService.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 
 namespace ConsumerService.Controllers
 {

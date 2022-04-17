@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Ocelot.Provider.Polly;
 
 namespace ApiGateway
 {
@@ -56,7 +57,7 @@ namespace ApiGateway
         }
         private void ConfigureOcelot(IServiceCollection services)
         {
-            services.AddOcelot().AddConsul();
+            services.AddOcelot().AddConsul().AddPolly();
         }
     }
 }
