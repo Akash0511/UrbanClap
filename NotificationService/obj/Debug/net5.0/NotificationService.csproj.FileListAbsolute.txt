@@ -43,3 +43,7 @@ D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\obj\Debug\net5
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\obj\Debug\net5.0\ref\NotificationService.dll
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\obj\Debug\net5.0\NotificationService.pdb
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\obj\Debug\net5.0\NotificationService.genruntimeconfig.cache
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\NotificationService\bin\Debug\net5.0\Nancy.dll

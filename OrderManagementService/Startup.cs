@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MassTransit;
+using MassTransit.Util;
 
 namespace OrderManagementService
 {
@@ -29,6 +30,7 @@ namespace OrderManagementService
         {
 
             services.AddControllers();
+
             services.AddMassTransit(config => {
                 config.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host(Configuration["EventBus:HostAddress"]);
@@ -36,6 +38,7 @@ namespace OrderManagementService
                 });
             });
             services.AddMassTransitHostedService();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrderManagementService", Version = "v1" });
@@ -44,7 +47,7 @@ namespace OrderManagementService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +63,17 @@ namespace OrderManagementService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var bus = app.ApplicationServices.GetService<IBusControl>();
+            var busHandle = TaskUtil.Await(() =>
+            {
+                return bus.StartAsync();
+            });
+
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                busHandle.Stop();
             });
         }
     }

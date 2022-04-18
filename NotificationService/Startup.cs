@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Util;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Reflection;
 
 namespace NotificationService
@@ -26,23 +28,27 @@ namespace NotificationService
             services.AddControllers();
             services.AddMassTransit(config => {
 
+                config.AddConsumer<OrderConfirmationConsumer>();
                 config.AddConsumer<ProviderNotificationConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host(Configuration["EventBus:HostAddress"]);
                     cfg.UseHealthCheck(ctx);
 
-                    cfg.ReceiveEndpoint(EventBusConstants.OrderConfirmationQueue, c => {
+                    cfg.ReceiveEndpoint("orderconfirmation", c => {
+                        c.PrefetchCount = 16;
                         c.ConfigureConsumer<OrderConfirmationConsumer>(ctx);
                     });
 
-                    cfg.ReceiveEndpoint(EventBusConstants.ProviderNotificationQueue, c => {
-                        c.ConfigureConsumer<ProviderNotificationConsumer>(ctx);
+                    cfg.ReceiveEndpoint("providernotification", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.ConfigureConsumer<ProviderNotificationConsumer>(ctx);
                     });
                 });
             });
             services.AddMassTransitHostedService();
-
+            services.AddScoped<OrderConfirmationConsumer>();
             services.AddScoped<ProviderNotificationConsumer>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -55,7 +61,7 @@ namespace NotificationService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +77,17 @@ namespace NotificationService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var bus = app.ApplicationServices.GetService<IBusControl>();
+            var busHandle = TaskUtil.Await(() =>
+            {
+                return bus.StartAsync();
+            });
+
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                busHandle.Stop();
             });
         }
     }

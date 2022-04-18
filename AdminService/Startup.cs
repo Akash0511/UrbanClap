@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Util;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace AdminService
 
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+
             services.AddMassTransit(config => {
                 config.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host(Configuration["EventBus:HostAddress"]);
@@ -37,6 +39,7 @@ namespace AdminService
                 });
             });
             services.AddMassTransitHostedService();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AdminService", Version = "v1" });
@@ -45,7 +48,7 @@ namespace AdminService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +64,17 @@ namespace AdminService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            var bus = app.ApplicationServices.GetService<IBusControl>();
+            var busHandle = TaskUtil.Await(() =>
+            {
+                return bus.StartAsync();
+            });
+
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                busHandle.Stop();
             });
         }
     }

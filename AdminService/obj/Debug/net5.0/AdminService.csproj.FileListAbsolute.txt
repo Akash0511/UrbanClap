@@ -41,3 +41,7 @@ D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\obj\Debug\net5.0\Admi
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\obj\Debug\net5.0\ref\AdminService.dll
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\obj\Debug\net5.0\AdminService.pdb
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\obj\Debug\net5.0\AdminService.genruntimeconfig.cache
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\bin\Debug\net5.0\Microsoft.Extensions.PlatformAbstractions.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\AdminService\bin\Debug\net5.0\Nancy.dll

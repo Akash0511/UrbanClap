@@ -31,14 +31,12 @@ namespace OrderManagementService.Controllers
         private readonly ILogger _logger;
 
         private readonly IConsulClient consulClient;
-        private readonly HttpClient _client;
 
-        public OrderServiceController(IBusControl bus, IConfiguration configuration, ILogger<OrderServiceController> logger, HttpClient client)
+        public OrderServiceController(IBusControl bus, IConfiguration configuration, ILogger<OrderServiceController> logger)
         {
             _bus = bus;
             _logger = logger;
             this.configuration = configuration;
-            _client = client;
 
              consulClient = new ConsulClient(config =>
             {
@@ -158,10 +156,11 @@ namespace OrderManagementService.Controllers
         [HttpPost]
         public async Task<PaymentDetails> MakePayment([FromBody] PaymentDetails paymentDetails)
         {
+            var client = new HttpClient();
             var serviceURL = await GetRequestUriAsync("PaymentService");
             Uri address = new Uri(serviceURL, $"payment/makePayment");
             string responseData;
-            using (var response = await _client.PostAsJsonAsync(address, paymentDetails))
+            using (var response = await client.PostAsJsonAsync(address, paymentDetails))
             {
                 orderServiceManagement.SetPaymentStatusSuccess(paymentDetails.RequestId);
                 responseData = await response.Content.ReadAsStringAsync();
@@ -206,10 +205,11 @@ namespace OrderManagementService.Controllers
         /// <returns>OnDemand service details object</returns>
         private async Task<OnDemandServiceDetails> GetServiceDetails(int serviceId)
         {
+            var client = new HttpClient();
             var serviceURL = await GetRequestUriAsync("OnDemandService");
             Uri address = new Uri(serviceURL, $"ondemandservice/getServiceDetails/{serviceId}");
             string responseData;
-            using (var response = await _client.GetAsync(address))
+            using (var response = await client.GetAsync(address))
             {
                 responseData = await response.Content.ReadAsStringAsync();
             }
@@ -223,10 +223,11 @@ namespace OrderManagementService.Controllers
         /// <returns>consumer details object</returns>
         private async Task<ConsumerDetails> GetConsumerDetails(int consumerId)
         {
-             var serviceURL = await GetRequestUriAsync("ConsumerService");
+            var client = new HttpClient();
+            var serviceURL = await GetRequestUriAsync("ConsumerService");
              Uri address = new Uri(serviceURL, $"consumer/getConsumerDetails/{consumerId}");
              string responseData;
-             using (var response = await _client.GetAsync(address))
+             using (var response = await client.GetAsync(address))
              {
                  responseData = await response.Content.ReadAsStringAsync();
              }
