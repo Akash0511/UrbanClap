@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "vDA4BPnAHsKaJs2xeOErKFTA/gSTZ6MtVGlDlfvWeapjiVmsD/zRjb2nInWZWicyLMT6hZDzriij24gESGaf3w==",
+  "dgSpecHash": "4kDFh8Sv92+sQb464uWMkbnyMsz+ZTgPgdAZO1dS04ebjuGB5gt3w4oqOHXSNZpS9TqfK4sSReztYuGLtxRBDg==",
   "success": true,
   "projectFilePath": "D:\\NAGP_2022\\Microservices\\nagp2022\\UrbanClap\\AdminService\\AdminService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\automatonymous\\5.1.1\\automatonymous.5.1.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\consul\\1.6.10.4\\consul.1.6.10.4.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\greenpipes\\4.0.0\\greenpipes.4.0.0.nupkg.sha512",
@@ -12,6 +14,7 @@
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\masstransit.extensions.dependencyinjection\\7.1.5\\masstransit.extensions.dependencyinjection.7.1.5.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\masstransit.rabbitmq\\7.1.5\\masstransit.rabbitmq.7.1.5.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\3.1.11\\microsoft.extensions.configuration.abstractions.3.1.11.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.11\\microsoft.extensions.dependencyinjection.abstractions.3.1.11.nupkg.sha512",

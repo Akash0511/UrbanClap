@@ -1,7 +1,10 @@
 ﻿using MassTransit;
 using Models;
-using Nancy.Json;
+using MediatR;
+
 using System.Threading.Tasks;
+using AutoMapper;
+using System;
 
 namespace NotificationService
 {
@@ -9,15 +12,23 @@ namespace NotificationService
     {
         public static string received;
 
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        public ProviderNotificationConsumer(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
         /// <summary>
         /// To consume the Providers list for notification from Admin
         /// </summary>
         /// <param name="context"></param>
         public async Task Consume(ConsumeContext<ProviderNotificationDTO> context)
         {
-            var receivedmessage = ((MassTransit.Context.ConsumeContextScope<ProviderNotificationDTO>)context).Message;
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            received = js.Serialize(receivedmessage);
+            var command = _mapper.Map<ProviderNotificationDTO>(context.Message);
+            var result = await _mediator.Send(command);
         }
 
     }

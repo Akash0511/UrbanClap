@@ -1,6 +1,7 @@
 ﻿using AdminService.Infrastructure;
 using AdminService.Models;
 using AdminService.Services;
+using AutoMapper;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,13 +18,22 @@ namespace AdminService.Controllers
     {
         private static readonly IAdminServiceManagement adminServiceManagement = new AdminServiceManagement();
 
-        private readonly IBusControl _bus;
+      //  private readonly IBusControl _bus;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public AdminController(IBusControl bus, IConfiguration config)
+       /* public AdminController(IBusControl bus, IConfiguration config)
         {
-            _bus = bus;
+           // _bus = bus;
             _config = config;
+        }*/
+
+        public AdminController(IConfiguration config, IMapper mapper, IPublishEndpoint publishEndpoint)
+        {
+            _config = config;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
         }
 
         /// <summary>
@@ -61,10 +71,14 @@ namespace AdminService.Controllers
         {
             adminServiceManagement.AddNotificationDetails(requestId, matchedProviders);
             ProviderNotificationDTO providers = new ProviderNotificationDTO(requestId, matchedProviders);
-            Uri uri = new Uri($"rabbitmq://{_config.GetValue<string>("RabbitMQHostName")}/providernotification");
+
+            var eventMessage = _mapper.Map<ProviderNotificationDTO>(providers);
+            await _publishEndpoint.Publish<ProviderNotificationDTO>(eventMessage);
+
+           /* Uri uri = new Uri($"rabbitmq://{_config.GetValue<string>("RabbitMQHostName")}/providernotification");
 
             var endPoint = await _bus.GetSendEndpoint(uri);
-            await endPoint.Send(providers);
+            await endPoint.Send(providers);*/
             return "Notification sent to all given providers";
         }
     }

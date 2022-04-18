@@ -29,6 +29,7 @@ namespace AdminService
         {
 
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
             services.AddMassTransit(config => {
                 config.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host(Configuration["EventBus:HostAddress"]);

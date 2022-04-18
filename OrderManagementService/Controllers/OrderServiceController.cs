@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Consul;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -7,10 +8,9 @@ using Newtonsoft.Json;
 using OrderManagementService.Infrastructure;
 using OrderManagementService.Models;
 using OrderManagementService.Services;
-using Steeltoe.Common.Discovery;
-using Steeltoe.Discovery;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -26,17 +26,24 @@ namespace OrderManagementService.Controllers
     {
         private static readonly IOrderServiceManagement orderServiceManagement = new OrderServiceManagement();
         private readonly IBusControl _bus;
-        private readonly IConfiguration _config;
+        private readonly IConfiguration configuration;
 
         private readonly ILogger _logger;
-        static DiscoveryHttpClientHandler _handler;
 
-        public OrderServiceController(IBusControl bus, IConfiguration config, ILogger<OrderServiceController> logger, IDiscoveryClient client)
+        private readonly IConsulClient consulClient;
+        private readonly HttpClient _client;
+
+        public OrderServiceController(IBusControl bus, IConfiguration configuration, ILogger<OrderServiceController> logger, HttpClient client)
         {
             _bus = bus;
-            _config = config;
             _logger = logger;
-            _handler = new DiscoveryHttpClientHandler(client);
+            this.configuration = configuration;
+            _client = client;
+
+             consulClient = new ConsulClient(config =>
+            {
+                config.Address = configuration.GetValue<Uri>("ServiceConfig:ServiceDiscoveryAddress");
+            });
         }
 
         /// <summary>
@@ -46,7 +53,7 @@ namespace OrderManagementService.Controllers
         /// <returns>List of service request details object by consumerId</returns>
         [Route("/order/getAllRaisedServiceRequests/{consumerId}")]
         [HttpGet]
-        public List<ServiceRequestDetails> GetAllRaisedServiceRequests(int consumerId)
+        public List<ServiceRequestDetails> GetAllRaisedServiceRequestsAsync(int consumerId)
         {
             return orderServiceManagement.GetAllRaisedServiceRequests(consumerId);
         }
@@ -135,7 +142,7 @@ namespace OrderManagementService.Controllers
         public async Task<ServiceRequestDetails> AssignProviderToServiceRequest([FromQuery] int requestId, [FromQuery] int providerId)
         {
             ServiceRequestDetails serviceRequest = orderServiceManagement.AssignProviderToServiceRequest(requestId, providerId);
-            Uri uri = new Uri($"rabbitmq://{_config.GetValue<string>("RabbitMQHostName")}/orderconfirmation");
+            Uri uri = new Uri($"rabbitmq://{configuration.GetValue<string>("RabbitMQHostName")}/orderconfirmation");
 
             var endPoint = await _bus.GetSendEndpoint(uri);
             await endPoint.Send(serviceRequest);
@@ -151,12 +158,15 @@ namespace OrderManagementService.Controllers
         [HttpPost]
         public async Task<PaymentDetails> MakePayment([FromBody] PaymentDetails paymentDetails)
         {
-            var client = new HttpClient(_handler, false);
-            string url = "http://paymentservice/payment/makePayment";
-
-            var response = await client.PostAsJsonAsync(url, paymentDetails);
-            orderServiceManagement.SetPaymentStatusSuccess(paymentDetails.RequestId);
-            return await response.Content.ReadAsAsync<PaymentDetails>();
+            var serviceURL = await GetRequestUriAsync("PaymentService");
+            Uri address = new Uri(serviceURL, $"payment/makePayment");
+            string responseData;
+            using (var response = await _client.PostAsJsonAsync(address, paymentDetails))
+            {
+                orderServiceManagement.SetPaymentStatusSuccess(paymentDetails.RequestId);
+                responseData = await response.Content.ReadAsStringAsync();
+            }
+            return JsonConvert.DeserializeObject(responseData, typeof(PaymentDetails)) as PaymentDetails;
         }
 
         /// <summary>
@@ -196,10 +206,10 @@ namespace OrderManagementService.Controllers
         /// <returns>OnDemand service details object</returns>
         private async Task<OnDemandServiceDetails> GetServiceDetails(int serviceId)
         {
-            var client = new HttpClient(_handler, false);
-            string url = "http://ondemandservice/ondemandservice/getServiceDetails/" + serviceId;
+            var serviceURL = await GetRequestUriAsync("OnDemandService");
+            Uri address = new Uri(serviceURL, $"ondemandservice/getServiceDetails/{serviceId}");
             string responseData;
-            using (var response = await client.GetAsync(url))
+            using (var response = await _client.GetAsync(address))
             {
                 responseData = await response.Content.ReadAsStringAsync();
             }
@@ -213,14 +223,35 @@ namespace OrderManagementService.Controllers
         /// <returns>consumer details object</returns>
         private async Task<ConsumerDetails> GetConsumerDetails(int consumerId)
         {
-            var client = new HttpClient(_handler, false);
-            string url = "http://consumerservice/consumer/getConsumerDetails/" + consumerId;
-            string responseData;
-            using (var response = await client.GetAsync(url))
+             var serviceURL = await GetRequestUriAsync("ConsumerService");
+             Uri address = new Uri(serviceURL, $"consumer/getConsumerDetails/{consumerId}");
+             string responseData;
+             using (var response = await _client.GetAsync(address))
+             {
+                 responseData = await response.Content.ReadAsStringAsync();
+             }
+             return JsonConvert.DeserializeObject(responseData, typeof(ConsumerDetails)) as ConsumerDetails;
+        }
+
+        private async Task<Uri> GetRequestUriAsync(string serviceName)
+        {
+            var allRegisteredServices = await consulClient.Agent.Services();
+            var registeredServices = allRegisteredServices.Response?.Where(s => s.Value.Service.Equals(serviceName, StringComparison.OrdinalIgnoreCase)).Select(x => x.Value).ToList();
+            var service = GetRandomInstance(registeredServices, serviceName);
+            var uriBuilder = new UriBuilder()
             {
-                responseData = await response.Content.ReadAsStringAsync();
-            }
-            return JsonConvert.DeserializeObject(responseData, typeof(ConsumerDetails)) as ConsumerDetails;
+                Host = service.Address,
+                Port = service.Port
+            };
+            return uriBuilder.Uri;
+        }
+
+        private AgentService GetRandomInstance(IList<AgentService> services, string serviceName)
+        {
+            Random _random = new Random();
+            AgentService servToUse = null;
+            servToUse = services[_random.Next(0, services.Count)];
+            return servToUse;
         }
     }
 }

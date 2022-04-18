@@ -1,16 +1,12 @@
+using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace NotificationService
 {
@@ -28,6 +24,29 @@ namespace NotificationService
         {
 
             services.AddControllers();
+            services.AddMassTransit(config => {
+
+                config.AddConsumer<ProviderNotificationConsumer>();
+
+                config.UsingRabbitMq((ctx, cfg) => {
+                    cfg.Host(Configuration["EventBus:HostAddress"]);
+                    cfg.UseHealthCheck(ctx);
+
+                    cfg.ReceiveEndpoint(EventBusConstants.OrderConfirmationQueue, c => {
+                        c.ConfigureConsumer<OrderConfirmationConsumer>(ctx);
+                    });
+
+                    cfg.ReceiveEndpoint(EventBusConstants.ProviderNotificationQueue, c => {
+                        c.ConfigureConsumer<ProviderNotificationConsumer>(ctx);
+                    });
+                });
+            });
+            services.AddMassTransitHostedService();
+
+            services.AddScoped<ProviderNotificationConsumer>();
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NotificationService", Version = "v1" });

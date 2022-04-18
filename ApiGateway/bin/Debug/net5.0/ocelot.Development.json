@@ -257,6 +257,13 @@
     //    "TimeoutValue": 20000
     //  }
     //},
+    {
+      "ServiceName": "providerservice",
+      "DownstreamPathTemplate": "/admin/serviceRequestAcceptOrDeny",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/serviceRequestAcceptOrDeny",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
     //{
     //  "DownstreamPathTemplate": "/admin/serviceRequestAcceptOrDeny",
     //  "DownstreamScheme": "http",
@@ -379,6 +386,13 @@
     //    "TimeoutValue": 20000
     //  }
     //},
+    {
+      "ServiceName": "adminservice",
+      "DownstreamPathTemplate": "/admin/getAllAcceptedRequestByProviders/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/getAllAcceptedRequestByProviders/{requestId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
     //{
     //  "DownstreamPathTemplate": "/admin/getAllAcceptedRequestByProviders/{requestId}",
     //  "DownstreamScheme": "http",
@@ -399,6 +413,13 @@
     //    "TimeoutValue": 20000
     //  }
     //},
+    {
+      "ServiceName": "adminservice",
+      "DownstreamPathTemplate": "/admin/sendNotificationToMatchedProviders/{requestId}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/sendNotificationToMatchedProviders/{requestId}",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
     //{
     //  "DownstreamPathTemplate": "/admin/sendNotificationToMatchedProviders/{requestId}",
     //  "DownstreamScheme": "http",

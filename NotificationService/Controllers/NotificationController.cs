@@ -10,6 +10,7 @@ namespace NotificationService.Controllers
     [ApiController]
     public class NotificationController : ControllerBase
     {
+
         /// <summary>
         /// Get method to return Order confirmation notification
         /// </summary>

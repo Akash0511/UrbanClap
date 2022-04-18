@@ -13,6 +13,7 @@ D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\bin\Debug\net5.0\N
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.csproj.AssemblyReference.cache
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.GeneratedMSBuildEditorConfig.editorconfig
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.AssemblyInfoInputs.cache
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.AssemblyInfo.cs
@@ -28,4 +29,3 @@ D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\C
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ref\ConsumerService.dll
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.pdb
 D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.genruntimeconfig.cache
-D:\NAGP_2022\Microservices\nagp2022\UrbanClap\ConsumerService\obj\Debug\net5.0\ConsumerService.csproj.AssemblyReference.cache
