@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QguFhwNnd+NIzzzXtcERls+o9Qq6TFoREl17cjMU+Jwybe9OC8AraF/TYbH2A1asOwmEIeFu09Rv4PD6HkXSwQ==",
+  "dgSpecHash": "zMEmV89I7RgTWxDBxS5ijMKXbFhs6gVGuz+HnTmRDJcHO7tEYKdezD/dIlnXb75byzIngr8u0cQ+zmMPmExx6w==",
   "success": true,
   "projectFilePath": "D:\\NAGP_2022\\Microservices\\nagp2022\\UrbanClap\\NotificationService\\NotificationService.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,7 @@
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\nancy\\2.0.0\\nancy.2.0.0.nupkg.sha512",

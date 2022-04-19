@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Vw54QFmSvJ0zXqaJilGoCy8AxXEbFOuHVIKPyy9PZJUS8QHY6PLR8hwn3HB8XJ/mVGpBqNz52zocmG88TwWbsA==",
+  "dgSpecHash": "Nxy6M6Z9bL4LUQx1FacOB5aKho/JXipOv7Kjn0xaDQ3bnoAWgoAewgqIvKNJ/ltcKsNKSMmE5goA1HIaMXAdqA==",
   "success": true,
   "projectFilePath": "D:\\NAGP_2022\\Microservices\\nagp2022\\UrbanClap\\OrderManagementService\\OrderManagementService.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",

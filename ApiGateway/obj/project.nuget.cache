@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SyKKPB0/OLITGVPyYDSboz/g6PhFnbB3m0ceYIJq7BeZ5u02PJ0Kp3MxAQzJpSF3eibRDCkPrX2azqJ7cPKZ9g==",
+  "dgSpecHash": "T3uy9OuCyfXkFC5lMMvsLy9eAOi0i7ix9PD6xFZmje4BhYLbIdntNZMuAXVrybDAyFg9kdE0Z3ZNGe7F4HNoBA==",
   "success": true,
   "projectFilePath": "D:\\NAGP_2022\\Microservices\\nagp2022\\UrbanClap\\ApiGateway\\ApiGateway.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.extensions.primitives\\2.0.0\\microsoft.extensions.primitives.2.0.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "irxTC+o8Ic3tufNtGt/ilW149Tz29w+aQe8Y4CWQWnIxu/Wyx1pwXKXDVxtB3X5/o2d4xmxj7tjGk9VazMdFKg==",
+  "dgSpecHash": "2mGWsOu7v3Z6jv5wsUm7EbcXByXxauxMLZqVDxBlQKK4GHs0wYcfW9b7m+fZdYRjjr5sZpIzSO1xP+LYCsbYdg==",
   "success": true,
   "projectFilePath": "D:\\NAGP_2022\\Microservices\\nagp2022\\UrbanClap\\PaymentService\\PaymentService.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,7 @@
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\akashbhardwaj\\.nuget\\packages\\newtonsoft.json\\12.0.1\\newtonsoft.json.12.0.1.nupkg.sha512",
