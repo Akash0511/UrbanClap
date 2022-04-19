@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[1.6.10.4, )"
             },
+            "Jaeger": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
             "MassTransit": {
               "target": "Package",
               "version": "[7.1.5, )"
@@ -67,6 +71,10 @@
             "Nancy": {
               "target": "Package",
               "version": "[2.0.0, )"
+            },
+            "OpenTracing.Contrib.NetCore": {
+              "target": "Package",
+              "version": "[0.7.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

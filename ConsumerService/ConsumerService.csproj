@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Consul" Version="1.6.10.4" />
+    <PackageReference Include="Jaeger" Version="1.0.2" />
+    <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.7.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
