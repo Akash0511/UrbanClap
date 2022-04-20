@@ -49,7 +49,7 @@ namespace OrderManagementService
 
             services.AddSingleton<ITracer>(serviceProvider =>
             {
-                Environment.SetEnvironmentVariable("JAEGER_SERVICE_NAME", "adminservice");
+                Environment.SetEnvironmentVariable("JAEGER_SERVICE_NAME", "ordermanagementservice");
                 Environment.SetEnvironmentVariable("JAEGER_AGENT_HOST", "jaeger-allinone");
                 Environment.SetEnvironmentVariable("JAEGER_AGENT_PORT", "6831");
                 Environment.SetEnvironmentVariable("JAEGER_SAMPLER_TYPE", "const");
