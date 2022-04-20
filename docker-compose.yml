@@ -1,0 +1,184 @@
+version: "3.4"
+services:
+  consul-server:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-server
+    restart: always
+    hostname: service-registry
+    volumes:
+     - ./consul/server.json:/consul/config/server.json:ro
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: "agent"
+
+  consul-client:
+    image: hashicorp/consul:1.10.0
+    container_name: consul-client
+    restart: always
+    volumes:
+     - ./consul/client.json:/consul/config/client.json:ro
+    networks:
+      - consul
+    command: "agent"
+    
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    environment:
+        RABBITMQ_ERLANG_COOKIE: guest
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - consul
+    ports:
+      - 5672:5672
+      - 15672:15672
+    hostname: rabbitmq
+    
+  jaeger-allinone: 
+      container_name: jaeger-allinone
+      image: jaegertracing/all-in-one:latest
+      environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+      ports:
+          - 5775:5775/udp
+          - 6831:6831/udp
+          - 6832:6832/udp
+          - 5778:5778
+          - 16686:16686
+          - 14268:1426
+      
+  apigateway:
+    image: bhardwajakash/apigateway:1
+    container_name: apigateway
+    depends_on:
+        - consul-server
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Docker
+    ports:
+        - "5100:80"
+      
+  consumerservice:
+    image: bhardwajakash/consumerservice:1
+    ports:
+        - "5000:80"
+    container_name: consumerservice
+    depends_on:
+        - consul-server
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+       - ServiceConfig__ServiceAddress=http://consumerservice
+        
+  providerservice:
+    image: bhardwajakash/providerservice:1
+    ports:
+        - "5001:80"
+    container_name: providerservice
+    depends_on:
+        - consul-server
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - ServiceConfig__ServiceAddress=http://providerservice
+
+  ondemandservice:
+    image: bhardwajakash/ondemandservice:1
+    ports:
+        - "5002:80"
+    container_name: ondemandservice
+    depends_on:
+        - consul-server
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - ServiceConfig__ServiceAddress=http://ondemandservice
+   
+  paymentservice:
+    image: bhardwajakash/paymentservice:1
+    ports:
+        - "5007:80"
+    container_name: paymentservice
+    depends_on:
+        - consul-server
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - ServiceConfig__ServiceAddress=http://paymentservice
+  
+  ordermanagementservice:
+    image: bhardwajakash/ordermanagementservice:1
+    ports:
+        - "5005:80"
+    container_name: ordermanagementservice
+    depends_on:
+        - consul-server
+        - rabbitmq
+        - jaeger-allinone
+        - paymentservice
+        - ondemandservice
+        - consumerservice
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - EventBus__HostAddress=amqp://guest:guest@rabbitmq:5672
+        - ServiceConfig__ServiceAddress=http://ordermanagementservice
+  
+  adminservice:
+    image: bhardwajakash/adminservice:1
+    ports:
+        - "5004:80"
+    container_name: adminservice
+    depends_on:
+        - consul-server
+        - rabbitmq
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - EventBus__HostAddress=amqp://guest:guest@rabbitmq:5672
+        - ServiceConfig__ServiceAddress=http://adminservice
+        
+  notificationservice:
+    image: bhardwajakash/notificationservice:1
+    ports:
+        - "5006:80"
+    container_name: notificationservice
+    depends_on:
+        - consul-server
+        - rabbitmq
+        - jaeger-allinone
+    networks:
+        - consul
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ServiceConfig__ServiceDiscoveryAddress=http://service-registry:8500/
+        - EventBus__HostAddress=amqp://guest:guest@rabbitmq:5672
+        - ServiceConfig__ServiceAddress=http://notificationservicessss
+      
+networks:
+  consul:
+    driver: bridge
